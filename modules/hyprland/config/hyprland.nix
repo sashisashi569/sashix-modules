@@ -1,7 +1,7 @@
 # home-manager: wayland.windowManager.hyprland
 # Common compositor settings.
 # Device-specific: monitor layout → home/<user>.nix (lib.mkForce)
-{ pkgs, ... }:
+{ pkgs, osConfig, lib, ... }:
 
 {
   wayland.windowManager.hyprland = {
@@ -29,7 +29,7 @@
       animations.enabled = true;
 
       input = {
-        kb_layout    = "jp";
+        kb_layout    = osConfig.sashix.desktop.xkbLayout or "us";
         repeat_rate  = 50;
         repeat_delay = 600;
         touchpad = {
