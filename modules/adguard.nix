@@ -6,7 +6,12 @@
 #                         upstream: https://1.1.1.1/dns-query, https://9.9.9.9/dns-query (IP直指定でbootstrap不要)
 #                         proxy:    socks5://127.0.0.1:<warp.proxy.port>
 #                         効果: DNS クエリが WARP 暗号化トンネル + DoH の二重保護を受ける
-#   WARP あり (proxy無し): 1.1.1.1 / 1.0.0.1 (plain DNS) — WARP が既にトランスポートを暗号化するため DoH 不要
+#   WARP あり (proxy無し): 1.1.1.1 / 1.0.0.1 (plain DNS)
+#     ※ tunnel_only モードでは全 TCP/UDP が WARP の暗号化トンネルを通るため、
+#        DNS クエリも例外なく保護される。この状態で DoH を重ねても ISP への
+#        秘匿性は向上せず、TLS ハンドシェイクのオーバーヘッドが増えるだけ。
+#        DoH が有効に機能するのは通信が保護されていない経路 (平文 UDP) に
+#        限られる。WARP proxy モード + dohViaWarpProxy を使うこと。
 #   WARP なし: 9.9.9.9 / 149.112.112.112 (Quad9, plain DNS)
 #
 # systemd-resolved:
@@ -41,7 +46,9 @@ in
     assertions = [
       {
         assertion = !useDoHProxy || (warpEnabled && warpCfg.proxy.enable);
-        message   = "sashix.adguard.dohViaWarpProxy.enable requires sashix.warp.enable = true and sashix.warp.proxy.enable = true";
+        message   = "sashix.adguard.dohViaWarpProxy.enable には sashix.warp.proxy.enable = true が必要です。"
+                  + " tunnel_only モードでは全通信が既に WARP トンネルで保護されるため DoH を重ねる意味はなく、"
+                  + " proxy モードでのみ DoH による DNS 秘匿化が有効です。";
       }
     ];
 
