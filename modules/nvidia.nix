@@ -49,6 +49,15 @@
       enable32Bit = true;
     };
 
+    # --- nouveau 競合防止 -------------------------------------------------------
+    # nouveau / nvidiafb / nova_core が NVIDIA プロプライエタリドライバと共存すると
+    # Wayland セッション開始時にシステムがフリーズする。
+    # nvidia-uvm は nvidia 本体がロードされた後に初期化する必要があるため softdep を設定。
+    boot.blacklistedKernelModules = [ "nouveau" "nvidiafb" "nova_core" ];
+    boot.extraModprobeConfig = ''
+      softdep nvidia post: nvidia-uvm
+    '';
+
     # --- Wayland / NVIDIA 向け環境変数 (Hyprland 最適化) -------------------
     environment.sessionVariables = {
       NIXOS_OZONE_WL            = "1";
