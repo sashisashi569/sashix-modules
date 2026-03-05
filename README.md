@@ -30,6 +30,16 @@ sashisashi が管理する再利用可能な NixOS モジュール集。
 
 詳細な設計・使い方は [DOCUMENT.md](DOCUMENT.md) を参照。
 
+## サードパーティサービスの利用規約
+
+以下のモジュールはサードパーティサービスを利用します。
+**各モジュールを有効化することで、対応するサービスの利用規約およびプライバシーポリシーに同意したものとみなされます。**
+
+| モジュール | サービス | 利用規約 |
+|---|---|---|
+| `warp` / `networkProtection` | Cloudflare WARP | [Terms](https://www.cloudflare.com/terms/) / [Privacy](https://www.cloudflare.com/privacypolicy/) |
+| `adguard` / `networkProtection` | Quad9 DNS (upstream / fallback) | [Terms](https://www.quad9.net/service/policies/) |
+
 ## 基本的な使い方
 
 ```nix
