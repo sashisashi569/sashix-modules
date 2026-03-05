@@ -18,6 +18,7 @@
     ./firewall.nix
     ./network-protection.nix  # warp.nix と adguard.nix を内包
     ./desktop.nix
+    ./nvidia.nix
     ./virtualization.nix
     ./gnome
     ./hyprland
@@ -43,6 +44,9 @@
       # warp と adguard は networkProtection に内包されるため個別設定不要
       networkProtection.enable = lib.mkDefault true;
       desktop.enable           = lib.mkDefault true;
+      # nvidia はハードウェア依存のため false がデフォルト
+      # NVIDIA GPU を搭載したマシンは configuration.nix で明示的に有効化する
+      nvidia.enable            = lib.mkDefault false;
       virtualization.enable    = lib.mkDefault true;
       gnome.enable             = lib.mkDefault true;
       hyprland.enable          = lib.mkDefault true;

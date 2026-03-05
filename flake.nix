@@ -24,6 +24,7 @@
       adguard           = import ./modules/adguard.nix;
       networkProtection = import ./modules/network-protection.nix;
       desktop           = import ./modules/desktop.nix;
+      nvidia            = import ./modules/nvidia.nix;
       virtualization    = import ./modules/virtualization.nix;
       gnome             = import ./modules/gnome;
       hyprland          = import ./modules/hyprland;

@@ -13,7 +13,7 @@
   };
 
   config = lib.mkIf config.sashix.boot.enable {
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
     # Enable systemd in initrd to allow systemd-cryptenroll for LUKS key enrollment
     boot.initrd.systemd.enable = true;
