@@ -1,6 +1,5 @@
 # Desktop base configuration
 # - X server + GDM display manager
-# - Japanese keyboard layout (jp)
 # - CUPS printing service
 # - Fonts (Noto CJK, Liberation, DejaVu)
 # - Default browser / editor via env vars and XDG MIME (オプションで変更可)
@@ -35,6 +34,18 @@ in
       default     = "vim";
       description = "Default editor command name (EDITOR / VISUAL env vars)";
     };
+
+    xkbLayout = lib.mkOption {
+      type        = lib.types.str;
+      default     = "us";
+      description = "X11 keyboard layout (e.g. \"us\", \"jp\").";
+    };
+
+    xkbVariant = lib.mkOption {
+      type        = lib.types.str;
+      default     = "";
+      description = "X11 keyboard variant.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -43,8 +54,8 @@ in
 
     # Keyboard layout
     services.xserver.xkb = {
-      layout  = "jp";
-      variant = "";
+      layout  = cfg.xkbLayout;
+      variant = cfg.xkbVariant;
     };
 
     # Printing
