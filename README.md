@@ -31,16 +31,16 @@ sashisashi が管理する再利用可能な NixOS モジュール集。
 
 詳細な設計・使い方は [DOCUMENT.md](DOCUMENT.md) を参照。
 
-## サードパーティサービスの利用規約
+## 注意事項
 
-以下のモジュールはサードパーティサービスを利用します。
-**各モジュールを有効化することで、対応するサービスの利用規約およびプライバシーポリシーに同意したものとみなされます。**
+`sashix.all.enable = true` を使用すると、以下のサードパーティサービスが暗黙的に導入されます。
+各サービスの利用規約およびプライバシーポリシーを事前に確認してください。
 
-| モジュール | サービス | 利用規約 |
+| モジュール | サービス | リンク |
 |---|---|---|
 | `warp` / `networkProtection` | Cloudflare WARP | [Terms](https://www.cloudflare.com/terms/) / [Privacy](https://www.cloudflare.com/privacypolicy/) |
-| `adguard` / `networkProtection` | Quad9 DNS (upstream / fallback) | [Terms](https://www.quad9.net/service/policies/) |
-| `tailscale` | Tailscale VPN が導入されます。 | [Terms](https://tailscale.com/terms) / [Privacy](https://tailscale.com/privacy-policy) |
+| `adguard` / `networkProtection` | Quad9 DNS | [Terms](https://www.quad9.net/service/policies/) |
+| `tailscale` | Tailscale VPN | [Terms](https://tailscale.com/terms) / [Privacy](https://tailscale.com/privacy-policy) |
 
 ## 基本的な使い方
 
