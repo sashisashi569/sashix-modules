@@ -80,10 +80,15 @@ in
               "149.112.112.112"
             ];
 
-          fallback_dns = [
-            "9.9.9.9"
-            "149.112.112.112"
-          ];
+          fallback_dns =
+            if warpEnabled then [
+              "1.1.1.1"
+              "1.0.0.1"
+            ]
+            else [
+              "9.9.9.9"
+              "149.112.112.112"
+            ];
 
           # DoH over WARP proxy: すべての upstream クエリを SOCKS5 経由で送出
           proxy = lib.mkIf useDoHProxy
@@ -103,7 +108,7 @@ in
       enable = true;
       settings.Resolve = {
         DNS            = "127.0.0.1";
-        FallbackDNS    = "9.9.9.9 149.112.112.112";
+        FallbackDNS    = if warpEnabled then "1.1.1.1 1.0.0.1" else "9.9.9.9 149.112.112.112";
         DNSSEC         = "allow-downgrade";
         DNSStubListener = "yes";
       };
