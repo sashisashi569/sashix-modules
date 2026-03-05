@@ -24,6 +24,9 @@
 
   config = lib.mkIf config.sashix.nvidia.enable {
 
+    # --- X / DRM ドライバ選択 -----------------------------------------------
+    services.xserver.videoDrivers = [ "nvidia" ];
+
     # --- ドライバ本体 -------------------------------------------------------
     hardware.nvidia = {
       # Wayland コンポジタ (Hyprland 等) に必須
