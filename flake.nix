@@ -14,6 +14,7 @@
       boot              = import ./modules/boot.nix;
       secureboot        = import ./modules/secureboot.nix { inherit lanzaboote; };
       networking        = import ./modules/networking.nix;
+      tailscale         = import ./modules/tailscale.nix;
       locale            = import ./modules/locale.nix;
       audio             = import ./modules/audio.nix;
       nix               = import ./modules/nix.nix;

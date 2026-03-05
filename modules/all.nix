@@ -10,6 +10,7 @@
     ./boot.nix
     (import ./secureboot.nix { inherit lanzaboote; })
     ./networking.nix
+    ./tailscale.nix
     ./locale.nix
     ./audio.nix
     ./nix.nix
@@ -33,6 +34,7 @@
       # Secure Boot を使うマシンは configuration.nix で明示的に有効化する
       secureboot.enable        = lib.mkDefault false;
       networking.enable        = lib.mkDefault true;
+      tailscale.enable         = lib.mkDefault true;
       locale.enable            = lib.mkDefault true;
       audio.enable             = lib.mkDefault true;
       nix.enable               = lib.mkDefault true;

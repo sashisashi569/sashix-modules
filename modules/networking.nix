@@ -1,9 +1,9 @@
 # Network configuration
 # - NetworkManager for connection management
-# - Tailscale VPN service
 # - MAC address randomization (privacy)
 # - systemd-resolved DNS forwarding
 #
+# Tailscale VPN: see tailscale.nix
 # Firewall: see firewall.nix
 # Network protection (WARP + AdGuard): see network-protection.nix
 { lib, config, ... }:
@@ -34,8 +34,5 @@ in
     #   nmcli connection modify "<SSID>" wifi.cloned-mac-address stable
     networking.networkmanager.wifi.macAddress     = "random";
     networking.networkmanager.ethernet.macAddress = "random";
-
-    # Tailscale VPN
-    services.tailscale.enable = true;
   };
 }

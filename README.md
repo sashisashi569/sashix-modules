@@ -16,7 +16,8 @@ sashisashi が管理する再利用可能な NixOS モジュール集。
 | `home-manager` | home-manager 有効化 + 共通設定 |
 | `boot` | カーネル・initrd・UKI (Secure Boot 非依存) |
 | `secureboot` | lanzaboote + sbctl による Secure Boot |
-| `networking` | NetworkManager / Tailscale |
+| `networking` | NetworkManager |
+| `tailscale` | Tailscale VPN |
 | `locale` | タイムゾーン・日本語ロケール・fcitx5 |
 | `audio` | PipeWire |
 | `nix` | flakes 有効化・自動 GC |
@@ -39,6 +40,7 @@ sashisashi が管理する再利用可能な NixOS モジュール集。
 |---|---|---|
 | `warp` / `networkProtection` | Cloudflare WARP | [Terms](https://www.cloudflare.com/terms/) / [Privacy](https://www.cloudflare.com/privacypolicy/) |
 | `adguard` / `networkProtection` | Quad9 DNS (upstream / fallback) | [Terms](https://www.quad9.net/service/policies/) |
+| `tailscale` | Tailscale VPN が導入されます。 | [Terms](https://tailscale.com/terms) / [Privacy](https://tailscale.com/privacy-policy) |
 
 ## 基本的な使い方
 
