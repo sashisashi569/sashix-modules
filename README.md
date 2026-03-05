@@ -18,7 +18,7 @@ sashisashi が管理する再利用可能な NixOS モジュール集。
 | `secureboot` | lanzaboote + sbctl による Secure Boot |
 | `networking` | NetworkManager |
 | `tailscale` | Tailscale VPN |
-| `locale` | タイムゾーン・日本語ロケール・fcitx5 |
+| `locale` | タイムゾーン・ロケール・キーボード配列・fcitx5 (すべてオプション) |
 | `audio` | PipeWire |
 | `nix` | flakes 有効化・自動 GC |
 | `yubikey` | pcscd・GPG agent・管理ツール |
