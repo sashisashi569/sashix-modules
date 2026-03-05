@@ -68,7 +68,6 @@ in
               # IP アドレス直指定で bootstrap DNS 解決を不要にする
               "https://1.1.1.1/dns-query"
               "https://1.0.0.1/dns-query"
-              "https://9.9.9.9/dns-query"
             ]
             else if warpEnabled then [
               # WARP が既にトランスポートを暗号化するため plain DNS で十分
