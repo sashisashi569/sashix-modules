@@ -17,6 +17,7 @@
       hyprpaper
       hyprlock
       hypridle
+      hyprdynamicmonitors
       rofi
       foot
       mako
@@ -40,6 +41,7 @@
       ./config/hypridle.nix
       ./config/hyprpaper.nix
       ./config/rofi.nix
+      ./config/hyprdynamicmonitors.nix
     ];
   };
 }
