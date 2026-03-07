@@ -124,7 +124,7 @@
 
       # Inhibit idle (hypridle) while any fullscreen window is active
       windowrule = [
-        "idle_inhibit fullscreen, fullscreen:1"
+        "idle_inhibit fullscreen, match:fullscreen true"
       ];
 
       # Mouse binds
