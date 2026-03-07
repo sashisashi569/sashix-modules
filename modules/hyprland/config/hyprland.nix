@@ -122,6 +122,11 @@
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
       ];
 
+      # Inhibit idle (hypridle) while any fullscreen window is active
+      windowrule = [
+        "idle_inhibit fullscreen, match:fullscreen true"
+      ];
+
       # Mouse binds
       bindm = [
         "$mod, mouse:272, movewindow"
