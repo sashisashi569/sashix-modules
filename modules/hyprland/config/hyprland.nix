@@ -123,7 +123,7 @@
       ];
 
       # Inhibit idle (hypridle) while any fullscreen window is active
-      windowrulev2 = [
+      windowrule = [
         "idleinhibit fullscreen, fullscreen:1"
       ];
 
