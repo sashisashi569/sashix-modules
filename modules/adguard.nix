@@ -93,19 +93,14 @@ in
       };
     };
 
-    # systemd-resolved: スタブリゾルバ (127.0.0.53)
-    # グローバル DNS: AdGuard Home のみ (Tailscale MagicDNS は tailscaled が per-link で自動設定)
-    #   100.100.100.100 をグローバルに入れると tailnet 外クエリが全て SERVFAIL になりノイズが増大
+    # systemd-resolved: AdGuard が有効な場合のみ DNS を 127.0.0.1 へ向ける
+    # enable/DNSStubListener は networking.nix で常時設定済み
     # FallbackDNS: AdGuard が応答不能の場合の最終手段
     #   LAN DNS (DHCP提供) は公衆無線でのポイズニングリスクがあるため使用しない
-    services.resolved = {
-      enable = true;
-      settings.Resolve = {
-        DNS            = "127.0.0.1";
-        FallbackDNS    = "9.9.9.9 149.112.112.112";
-        DNSSEC         = "allow-downgrade";
-        DNSStubListener = "yes";
-      };
+    services.resolved.settings.Resolve = {
+      DNS         = "127.0.0.1";
+      FallbackDNS = "9.9.9.9 149.112.112.112";
+      DNSSEC      = "allow-downgrade";
     };
   };
 }
