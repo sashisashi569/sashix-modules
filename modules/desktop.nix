@@ -25,7 +25,7 @@ in
 
     browserPackage = lib.mkOption {
       type        = lib.types.package;
-      default     = pkgs.floorp-bin;
+      default     = pkgs.brave;
       description = "Default browser package";
     };
 
