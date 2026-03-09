@@ -42,6 +42,11 @@ in
   config = lib.mkIf cfg.enable {
     services.cloudflare-warp.enable = true;
 
+    # WARP トンネルインターフェースをファイアウォールで信頼する
+    # tunnel_only モードでは CloudflareWARP インターフェース経由でトラフィックが流れるため、
+    # trustedInterfaces に追加しないとパケットが INPUT ルールでドロップされる
+    networking.firewall.trustedInterfaces = [ "CloudflareWARP" ];
+
     # モードを設定するサービス
     # WARP 未登録の場合はスキップ (登録後に restart して適用)
     systemd.services.cloudflare-warp-configure = {
