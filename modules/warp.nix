@@ -2,10 +2,10 @@
 #
 # --- tunnel_only モード (デフォルト) ---
 #   TCP/UDP 全通信を暗号化トンネル経由にする。DNS 制御は行わない。
-#   Split-tunnel exclusions (デフォルトで既に含まれている):
+#   Split-tunnel exclusions (cloudflare-warp-configure.service で明示設定):
 #     Tailnet:  100.64.0.0/10 (MagicDNS 100.100.100.100 を含む)
 #               fc00::/7     (fd7a:115c:a1e0::/48 を含む)
-#     LAN:      10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
+#     LAN:      10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 (WARP デフォルト)
 #
 # --- proxy モード ---
 #   全通信をトンネリングせず、ローカル SOCKS5/HTTPS プロキシを提供する。
@@ -65,6 +65,12 @@ in
         ''
         else ''
           ${pkgs.cloudflare-warp}/bin/warp-cli --accept-tos mode tunnel_only || true
+        '' + ''
+          # Tailscale 帯域を WARP トンネルから除外 (split-tunnel)
+          # これを設定しないと WARP が 100.64.0.0/10 を含む Tailscale 通信を
+          # WARP トンネルに吸い込み、exit-node / MagicDNS (100.100.100.100) が壊れる
+          ${pkgs.cloudflare-warp}/bin/warp-cli --accept-tos tunnel exclude add 100.64.0.0/10 || true
+          ${pkgs.cloudflare-warp}/bin/warp-cli --accept-tos tunnel exclude add fc00::/7      || true
         '';
     };
   };
