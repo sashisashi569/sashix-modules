@@ -1,7 +1,8 @@
 # Network configuration
 # - NetworkManager for connection management
 # - MAC address randomization (privacy)
-# - systemd-resolved DNS forwarding
+# - systemd-resolved: スタブリゾルバ (127.0.0.53) を常時有効化
+#   DNS サーバの指定は各モジュールが上書き (AdGuard: 127.0.0.1 / デフォルト: NM が DHCP 提供)
 #
 # Tailscale VPN: see tailscale.nix
 # Firewall: see firewall.nix
@@ -26,7 +27,7 @@ in
     networking.hostName = cfg.hostName;
     networking.networkmanager.enable = true;
 
-    # Forward NetworkManager DNS config to systemd-resolved
+    # NetworkManager の DNS クエリを systemd-resolved 経由に転送
     networking.networkmanager.dns = "systemd-resolved";
 
     # MAC address randomization (プライバシー保護): 接続のたびに新しいランダムMACを使用
@@ -34,5 +35,13 @@ in
     #   nmcli connection modify "<SSID>" wifi.cloned-mac-address stable
     networking.networkmanager.wifi.macAddress     = "random";
     networking.networkmanager.ethernet.macAddress = "random";
+
+    # systemd-resolved: スタブリゾルバを常時有効化
+    # 127.0.0.53 をローカル DNS スタブとして提供し、NM 経由の全クエリを受け付ける
+    # DNS サーバ自体は adguard.nix (127.0.0.1) またはデフォルト (NM が DHCP で提供) が担当
+    services.resolved = {
+      enable = true;
+      settings.Resolve.DNSStubListener = "yes";
+    };
   };
 }

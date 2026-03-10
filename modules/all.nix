@@ -42,7 +42,10 @@
       yubikey.enable           = lib.mkDefault true;
       firewall.enable          = lib.mkDefault true;
       # warp と adguard は networkProtection に内包されるため個別設定不要
-      networkProtection.enable = lib.mkDefault true;
+      # WARP は Tailscale exit-node と競合するため、明示的にオプトインする設計にする
+      # (WARP が Connected 状態だと Tailscale の routing を上書きし、
+      #  100.64.0.0/10 を含む Tailscale 通信が WARP トンネルに吸われる)
+      networkProtection.enable = lib.mkDefault false;
       desktop.enable           = lib.mkDefault true;
       # nvidia はハードウェア依存のため false がデフォルト
       # NVIDIA GPU を搭載したマシンは configuration.nix で明示的に有効化する

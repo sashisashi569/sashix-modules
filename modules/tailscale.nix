@@ -12,5 +12,10 @@
 
   config = lib.mkIf config.sashix.tailscale.enable {
     services.tailscale.enable = true;
+
+    # exit-node クライアントとして使用するための設定
+    # checkReversePath = "loose" を有効にし、exit-node 経由の折り返しパケットを受け入れる
+    # "server" または "both" に上書きすれば exit-node のアドバタイズも可能
+    services.tailscale.useRoutingFeatures = lib.mkDefault "client";
   };
 }
